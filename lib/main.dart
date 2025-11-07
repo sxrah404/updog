@@ -20,7 +20,10 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Image.asset(updog))),
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(child: Image.asset(updog)),
+      ),
     );
   }
 }
