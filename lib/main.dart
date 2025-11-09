@@ -17,12 +17,29 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String updog = 'assets/images/whats_updog.png';
+    String home_icon = 'assets/images/home.png';
+    String journal_icon = 'assets/images/journal.png';
+    String settings_icon = 'assets/images/settings.png';
+    String background = 'assets/images/background.png';
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(child: Image.asset(updog)),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(background),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50), // adjust as needed
+              child: Image.asset(updog),
+            ),
+          ),
+        ),
       ),
     );
   }
