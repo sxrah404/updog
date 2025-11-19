@@ -6,9 +6,11 @@ import 'settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(const Size(800, 1200));
   }
+
   runApp(const MainApp());
 }
 
@@ -34,28 +36,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  Widget _buildHomePage() {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final double topPadding = constraints.maxHeight * 0.08;
-          return Padding(
-            padding: EdgeInsets.only(top: topPadding),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Image.asset('assets/images/logo.png', width: 600),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  final List<Widget> _pages = const [HomePage(), JournalPage(), SettingsPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -65,41 +46,143 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      _buildHomePage(),
-      const JournalPage(),
-      const SettingsPage(),
-    ];
-
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
+      body: Stack(children: [_pages[_selectedIndex], _buildNavBar()]),
+    );
+  }
+
+  Widget _buildNavBar() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          pages[_selectedIndex],
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Image.asset('assets/images/home.png', width: 60),
-                  onPressed: () => _onItemTapped(0),
-                ),
-                const SizedBox(width: 40),
-                IconButton(
-                  icon: Image.asset('assets/images/journal.png', width: 60),
-                  onPressed: () => _onItemTapped(1),
-                ),
-                const SizedBox(width: 40),
-                IconButton(
-                  icon: Image.asset('assets/images/settings.png', width: 60),
-                  onPressed: () => _onItemTapped(2),
-                ),
-              ],
-            ),
+          IconButton(
+            icon: Image.asset('assets/images/home.png', width: 60),
+            onPressed: () => _onItemTapped(0),
+          ),
+          const SizedBox(width: 40),
+          IconButton(
+            icon: Image.asset('assets/images/journal.png', width: 60),
+            onPressed: () => _onItemTapped(1),
+          ),
+          const SizedBox(width: 40),
+          IconButton(
+            icon: Image.asset('assets/images/settings.png', width: 60),
+            onPressed: () => _onItemTapped(2),
           ),
         ],
       ),
     );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Image(
+                image: AssetImage('assets/images/logo.png'),
+                width: 500,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const Text(
+              "i'm feeling...",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final bool isWide = constraints.maxWidth > 1000;
+                    return isWide ? _buildWideLayout() : _buildNarrowLayout();
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 100),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWideLayout() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildEmotionButton('assets/images/happy.png', 'happy'),
+        _buildEmotionButton('assets/images/sad.png', 'sad'),
+        _buildEmotionButton('assets/images/mad.png', 'mad'),
+        _buildEmotionButton('assets/images/other.png', 'other'),
+      ],
+    );
+  }
+
+  Widget _buildNarrowLayout() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildEmotionButton('assets/images/happy.png', 'happy'),
+            _buildEmotionButton('assets/images/sad.png', 'sad'),
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildEmotionButton('assets/images/mad.png', 'mad'),
+            _buildEmotionButton('assets/images/other.png', 'other'),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmotionButton(String asset, String label) {
+    return GestureDetector(
+      onTap: () => _onEmotionSelected(label),
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(asset, width: 200, height: 200, fit: BoxFit.contain),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _onEmotionSelected(String emotion) {
+    print('Selected: $emotion');
+    // figure out logic later
   }
 }
