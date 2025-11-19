@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _buildNavBar() {
     return Positioned(
-      bottom: 0,
+      bottom: 6,
       left: 0,
       right: 0,
       child: Row(
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 40),
               child: Image(
                 image: AssetImage('assets/images/logo.png'),
                 width: 500,
@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
               "i'm feeling...",
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
                 fontFamily: 'Montserrat',
               ),
             ),
