@@ -13,7 +13,7 @@ class JournalPage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                themeProvider.getImagePath('assets/images/j-background.png'),
+                themeProvider.getImagePath('assets/images/journal1_bg.png'),
               ),
               fit: BoxFit.cover,
             ),

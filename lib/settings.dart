@@ -13,7 +13,7 @@ class SettingsPage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                themeProvider.getImagePath('assets/images/s-background.png'),
+                themeProvider.getImagePath('assets/images/settings_bg.png'),
               ),
               fit: BoxFit.cover,
             ),

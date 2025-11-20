@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                themeProvider.getImagePath('assets/images/background.png'),
+                themeProvider.getImagePath('assets/images/bg.png'),
               ),
               fit: BoxFit.cover,
             ),
