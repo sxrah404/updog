@@ -1,17 +1,22 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
 import 'journal.dart';
 import 'settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(const Size(800, 1000));
   }
-
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -35,7 +40,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-
   final List<Widget> _pages = const [HomePage(), JournalPage(), SettingsPage()];
 
   void _onItemTapped(int index) {
@@ -84,64 +88,89 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 40),
-              child: Image(
-                image: AssetImage('assets/images/logo.png'),
-                width: 500,
-                fit: BoxFit.contain,
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, _) {
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                themeProvider.getImagePath('assets/images/background.png'),
               ),
+              fit: BoxFit.cover,
             ),
-            const Text(
-              "i'm feeling...",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Montserrat',
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final bool isWide = constraints.maxWidth > 1000;
-                    return isWide ? _buildWideLayout() : _buildNarrowLayout();
-                  },
+          ),
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Image(
+                    image: AssetImage(
+                      themeProvider.getImagePath('assets/images/logo.png'),
+                    ),
+                    width: 500,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
+                Text(
+                  "i'm feeling...",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Montserrat',
+                    color: themeProvider.isDarkMode
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final bool isWide = constraints.maxWidth > 1000;
+                        return isWide
+                            ? _buildWideLayout(themeProvider)
+                            : _buildNarrowLayout(themeProvider);
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 100),
+              ],
             ),
-            const SizedBox(height: 100),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildWideLayout() {
+  Widget _buildWideLayout(ThemeProvider themeProvider) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildEmotionButton('assets/images/happy.png', 'happy'),
-        _buildEmotionButton('assets/images/sad.png', 'sad'),
-        _buildEmotionButton('assets/images/mad.png', 'mad'),
-        _buildEmotionButton('assets/images/other.png', 'other'),
+        _buildEmotionButton(
+          themeProvider.getImagePath('assets/images/happy.png'),
+          'happy',
+        ),
+        _buildEmotionButton(
+          themeProvider.getImagePath('assets/images/sad.png'),
+          'sad',
+        ),
+        _buildEmotionButton(
+          themeProvider.getImagePath('assets/images/mad.png'),
+          'mad',
+        ),
+        _buildEmotionButton(
+          themeProvider.getImagePath('assets/images/other.png'),
+          'other',
+        ),
       ],
     );
   }
 
-  Widget _buildNarrowLayout() {
+  Widget _buildNarrowLayout(ThemeProvider themeProvider) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -150,16 +179,28 @@ class HomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildEmotionButton('assets/images/happy.png', 'happy'),
-            _buildEmotionButton('assets/images/sad.png', 'sad'),
+            _buildEmotionButton(
+              themeProvider.getImagePath('assets/images/happy.png'),
+              'happy',
+            ),
+            _buildEmotionButton(
+              themeProvider.getImagePath('assets/images/sad.png'),
+              'sad',
+            ),
           ],
         ),
         Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildEmotionButton('assets/images/mad.png', 'mad'),
-            _buildEmotionButton('assets/images/other.png', 'other'),
+            _buildEmotionButton(
+              themeProvider.getImagePath('assets/images/mad.png'),
+              'mad',
+            ),
+            _buildEmotionButton(
+              themeProvider.getImagePath('assets/images/other.png'),
+              'other',
+            ),
           ],
         ),
       ],
