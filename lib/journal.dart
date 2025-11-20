@@ -8,7 +8,7 @@ class JournalPage extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/background.png'),
+          image: AssetImage('assets/images/j-background.png'),
           fit: BoxFit.cover,
         ),
       ),
