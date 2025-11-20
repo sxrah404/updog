@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "i'm feeling...",
+                  "I'm feeling...",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
