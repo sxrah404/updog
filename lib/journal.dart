@@ -26,12 +26,35 @@ class JournalPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Center(
-                  child: Image.asset(
-                    'assets/images/journal1.png',
-                    fit: BoxFit.cover,
-                    height: double.infinity,
-                  ),
+                Stack(
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        'assets/images/page.png',
+                        fit: BoxFit.cover,
+                        height: double.infinity,
+                      ),
+                    ),
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            // turn this into button later
+                            'assets/images/new_entry.png',
+                            fit: BoxFit.cover,
+                            height: 200,
+                          ),
+                          Image.asset(
+                            // turn this into button later
+                            'assets/images/past_entries.png',
+                            fit: BoxFit.cover,
+                            height: 200,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
