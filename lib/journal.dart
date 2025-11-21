@@ -12,16 +12,28 @@ class JournalPage extends StatelessWidget {
         return SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 100),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    themeProvider.getImagePath('assets/images/journal1_bg.png'),
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        themeProvider.getImagePath('assets/images/bg.png'),
+                      ),
+
+                      fit: BoxFit.cover,
+                      alignment: Alignment.bottomCenter,
+                    ),
                   ),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.bottomCenter,
                 ),
-              ),
+                Center(
+                  child: Image.asset(
+                    'assets/images/journal1.png',
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                  ),
+                ),
+              ],
             ),
           ),
         );
