@@ -9,23 +9,18 @@ class JournalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                themeProvider.getImagePath('assets/images/journal1_bg.png'),
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: const Center(
-            child: Text(
-              'Journal',
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Montserrat',
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 100),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    themeProvider.getImagePath('assets/images/journal1_bg.png'),
+                  ),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.bottomCenter,
+                ),
               ),
             ),
           ),

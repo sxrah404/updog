@@ -9,7 +9,7 @@ import 'settings.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await DesktopWindow.setWindowSize(const Size(800, 1000));
+    await DesktopWindow.setWindowSize(const Size(780, 1000));
   }
   runApp(
     ChangeNotifierProvider(
@@ -51,33 +51,72 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [_pages[_selectedIndex], _buildNavBar()]),
-    );
-  }
-
-  Widget _buildNavBar() {
-    return Positioned(
-      bottom: 6,
-      left: 0,
-      right: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset('assets/images/home.png', width: 60),
-            onPressed: () => _onItemTapped(0),
-          ),
-          const SizedBox(width: 40),
-          IconButton(
-            icon: Image.asset('assets/images/journal.png', width: 60),
-            onPressed: () => _onItemTapped(1),
-          ),
-          const SizedBox(width: 40),
-          IconButton(
-            icon: Image.asset('assets/images/settings.png', width: 60),
-            onPressed: () => _onItemTapped(2),
-          ),
-        ],
+      body: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, _) {
+          return Stack(
+            children: [
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            themeProvider.getImagePath('assets/images/bg.png'),
+                          ),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Image.asset(
+                    themeProvider.getImagePath('assets/images/grass.png'),
+                    width: double.infinity,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
+              _pages[_selectedIndex],
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 100,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Image.asset('assets/images/home.png', width: 60),
+                        onPressed: () => _onItemTapped(0),
+                      ),
+                      const SizedBox(width: 40),
+                      IconButton(
+                        icon: Image.asset(
+                          'assets/images/journal.png',
+                          width: 60,
+                        ),
+                        onPressed: () => _onItemTapped(1),
+                      ),
+                      const SizedBox(width: 40),
+                      IconButton(
+                        icon: Image.asset(
+                          'assets/images/settings.png',
+                          width: 60,
+                        ),
+                        onPressed: () => _onItemTapped(2),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -90,16 +129,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                themeProvider.getImagePath('assets/images/bg.png'),
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: SafeArea(
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 100),
             child: Column(
               children: [
                 Padding(
@@ -136,7 +168,6 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 100),
               ],
             ),
           ),
