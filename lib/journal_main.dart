@@ -14,12 +14,14 @@ class JournalMainPage extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              // turn this into button later
-              'assets/images/new_entry.png',
-              fit: BoxFit.contain,
-              height: screenHeight * 0.18,
+            GestureDetector(
+              onTap: () {print('New entry pressed');},
+              child: Image.asset('assets/images/new_entry.png',
+                fit: BoxFit.contain,
+                height: screenHeight * 0.18,
+              ),
             ),
+            
             Image.asset(
               // turn this into button later
               'assets/images/past_entries.png',
