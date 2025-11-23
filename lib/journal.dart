@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'journal_main.dart';
+import 'journal_new.dart';
+import 'journal_past.dart';
 
 class JournalPage extends StatelessWidget {
   const JournalPage({super.key});
@@ -37,7 +39,9 @@ class JournalPage extends StatelessWidget {
                         height: double.infinity,
                       ),
                     ),
-                    Center(child: JournalPageMain()),
+                    //TODO format pages and add navigation feature
+                    //JournalMainPage, JournalNewEntryPage, JournalPastEntriesPage
+                    Center(child: JournalMainPage()),
                   ],
                 ),
               ],
