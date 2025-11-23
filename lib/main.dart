@@ -10,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(const Size(780, 1000));
-    await DesktopWindow.setMinWindowSize(const Size(500, 700));
+    await DesktopWindow.setMinWindowSize(const Size(580, 600));
   }
   runApp(
     ChangeNotifierProvider(
