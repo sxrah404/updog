@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'theme_provider.dart';
+import 'journal_main.dart';
 
 class JournalPage extends StatelessWidget {
   const JournalPage({super.key});
@@ -36,25 +37,7 @@ class JournalPage extends StatelessWidget {
                         height: double.infinity,
                       ),
                     ),
-                    Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            // turn this into button later
-                            'assets/images/new_entry.png',
-                            fit: BoxFit.contain,
-                            height: screenHeight * 0.18,
-                          ),
-                          Image.asset(
-                            // turn this into button later
-                            'assets/images/past_entries.png',
-                            fit: BoxFit.contain,
-                            height: screenHeight * 0.18,
-                          ),
-                        ],
-                      ),
-                    ),
+                    Center(child: JournalPageMain()),
                   ],
                 ),
               ],
@@ -65,5 +48,3 @@ class JournalPage extends StatelessWidget {
     );
   }
 }
-
-//Trying something out
