@@ -10,6 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(const Size(780, 1000));
+    await DesktopWindow.setMinWindowSize(const Size(500, 700));
   }
   runApp(
     ChangeNotifierProvider(
@@ -50,6 +51,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final grassHeight = screenHeight * 0.1;
+
     return Scaffold(
       body: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
@@ -74,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                   Image.asset(
                     themeProvider.getImagePath('assets/images/grass.png'),
                     width: double.infinity,
-                    height: 100,
+                    height: grassHeight,
                     fit: BoxFit.cover,
                   ),
                 ],
@@ -84,29 +88,32 @@ class _MainScreenState extends State<MainScreen> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: 100,
+                height: grassHeight,
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: Image.asset('assets/images/home.png', width: 60),
+                        icon: Image.asset(
+                          'assets/images/home.png',
+                          width: grassHeight * 0.6,
+                        ),
                         onPressed: () => _onItemTapped(0),
                       ),
-                      const SizedBox(width: 40),
+                      SizedBox(width: grassHeight * 0.4),
                       IconButton(
                         icon: Image.asset(
                           'assets/images/journal.png',
-                          width: 60,
+                          width: grassHeight * 0.6,
                         ),
                         onPressed: () => _onItemTapped(1),
                       ),
-                      const SizedBox(width: 40),
+                      SizedBox(width: grassHeight * 0.4),
                       IconButton(
                         icon: Image.asset(
                           'assets/images/settings.png',
-                          width: 60,
+                          width: grassHeight * 0.6,
                         ),
                         onPressed: () => _onItemTapped(2),
                       ),
@@ -127,27 +134,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 100),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.1),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40),
+                  padding: EdgeInsets.only(top: screenHeight * 0.04),
                   child: Image(
                     image: AssetImage(
                       themeProvider.getImagePath('assets/images/logo.png'),
                     ),
-                    width: 500,
+                    width: screenHeight * 0.5,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Text(
                   "i'm feeling...",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: screenHeight * 0.024,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Montserrat',
                     color: themeProvider.isDarkMode
@@ -162,8 +171,8 @@ class HomePage extends StatelessWidget {
                       builder: (context, constraints) {
                         final bool isWide = constraints.maxWidth > 1000;
                         return isWide
-                            ? _buildWideLayout(themeProvider)
-                            : _buildNarrowLayout(themeProvider);
+                            ? _buildWideLayout(themeProvider, screenHeight)
+                            : _buildNarrowLayout(themeProvider, screenHeight);
                       },
                     ),
                   ),
@@ -176,7 +185,9 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildWideLayout(ThemeProvider themeProvider) {
+  Widget _buildWideLayout(ThemeProvider themeProvider, double screenHeight) {
+    final buttonSize = screenHeight * 0.2;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -184,24 +195,30 @@ class HomePage extends StatelessWidget {
         _buildEmotionButton(
           themeProvider.getImagePath('assets/images/happy.png'),
           'happy',
+          buttonSize,
         ),
         _buildEmotionButton(
           themeProvider.getImagePath('assets/images/sad.png'),
           'sad',
+          buttonSize,
         ),
         _buildEmotionButton(
           themeProvider.getImagePath('assets/images/mad.png'),
           'mad',
+          buttonSize,
         ),
         _buildEmotionButton(
           themeProvider.getImagePath('assets/images/other.png'),
           'other',
+          buttonSize,
         ),
       ],
     );
   }
 
-  Widget _buildNarrowLayout(ThemeProvider themeProvider) {
+  Widget _buildNarrowLayout(ThemeProvider themeProvider, double screenHeight) {
+    final buttonSize = screenHeight * 0.2;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -213,10 +230,12 @@ class HomePage extends StatelessWidget {
             _buildEmotionButton(
               themeProvider.getImagePath('assets/images/happy.png'),
               'happy',
+              buttonSize,
             ),
             _buildEmotionButton(
               themeProvider.getImagePath('assets/images/sad.png'),
               'sad',
+              buttonSize,
             ),
           ],
         ),
@@ -227,10 +246,12 @@ class HomePage extends StatelessWidget {
             _buildEmotionButton(
               themeProvider.getImagePath('assets/images/mad.png'),
               'mad',
+              buttonSize,
             ),
             _buildEmotionButton(
               themeProvider.getImagePath('assets/images/other.png'),
               'other',
+              buttonSize,
             ),
           ],
         ),
@@ -238,15 +259,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildEmotionButton(String asset, String label) {
+  Widget _buildEmotionButton(String asset, String label, double size) {
     return GestureDetector(
       onTap: () => _onEmotionSelected(label),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+        constraints: BoxConstraints(maxWidth: size, maxHeight: size),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(asset, width: 200, height: 200, fit: BoxFit.contain),
+            Image.asset(asset, width: size, height: size, fit: BoxFit.contain),
           ],
         ),
       ),

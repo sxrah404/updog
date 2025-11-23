@@ -7,11 +7,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 100), 
+            padding: EdgeInsets.only(bottom: screenHeight * 0.1),
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -26,11 +28,11 @@ class SettingsPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 120),
+                    SizedBox(height: screenHeight * 0.12),
                     Text(
                       'Settings',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: screenHeight * 0.024,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Montserrat',
                         color: themeProvider.isDarkMode
@@ -38,9 +40,9 @@ class SettingsPage extends StatelessWidget {
                             : Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: screenHeight * 0.04),
                     Container(
-                      padding: const EdgeInsets.only(right: 14),
+                      padding: EdgeInsets.only(right: screenHeight * 0.014),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -49,22 +51,24 @@ class SettingsPage extends StatelessWidget {
                             themeProvider.isDarkMode
                                 ? 'assets/images/dark_mode.png'
                                 : 'assets/images/light_mode.png',
-                            width: 80,
-                            height: 80,
+                            width: screenHeight * 0.08,
+                            height: screenHeight * 0.08,
                           ),
-                          const SizedBox(width: 20),
+                          SizedBox(width: screenHeight * 0.02),
                           Text(
-                            themeProvider.isDarkMode ? 'Dark Mode' : 'Light Mode',
+                            themeProvider.isDarkMode
+                                ? 'Dark Mode'
+                                : 'Light Mode',
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontFamily: 'Montserrat',
-                              fontSize: 20,
+                              fontSize: screenHeight * 0.02,
                               color: themeProvider.isDarkMode
                                   ? Colors.white
                                   : Colors.black,
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          SizedBox(width: screenHeight * 0.02),
                           Switch(
                             value: themeProvider.isDarkMode,
                             onChanged: (value) {

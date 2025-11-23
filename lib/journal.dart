@@ -7,11 +7,13 @@ class JournalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 100),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.1),
             child: Stack(
               children: [
                 Container(
@@ -20,7 +22,6 @@ class JournalPage extends StatelessWidget {
                       image: AssetImage(
                         themeProvider.getImagePath('assets/images/bg.png'),
                       ),
-
                       fit: BoxFit.cover,
                       alignment: Alignment.bottomCenter,
                     ),
@@ -42,14 +43,14 @@ class JournalPage extends StatelessWidget {
                           Image.asset(
                             // turn this into button later
                             'assets/images/new_entry.png',
-                            fit: BoxFit.cover,
-                            height: 200,
+                            fit: BoxFit.contain,
+                            height: screenHeight * 0.18,
                           ),
                           Image.asset(
                             // turn this into button later
                             'assets/images/past_entries.png',
-                            fit: BoxFit.cover,
-                            height: 200,
+                            fit: BoxFit.contain,
+                            height: screenHeight * 0.18,
                           ),
                         ],
                       ),
