@@ -26,29 +26,61 @@ class JournalNewEntryPage extends StatelessWidget {
             Row(children: [],),
 
             //Journal entry
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Type here'
-              )
-              
+            Padding(
+              padding: const EdgeInsets.only(left: 44),
+              child: SizedBox(
+                height: 360, //376
+                width: 400, //420
+                child: TextField(
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: const InputDecoration(
+                    hintText: 'Type here',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2
+                      ),
+                    ),
+                  )
+                ),
+              ),
             ),
 
+            SizedBox(height: 38,),
+        
+
             //Back and save buttons
-            Row(
-              children: [
-                Image.asset(
-                  // turn this into button later
-                  'assets/images/arrow.png',
-                  fit: BoxFit.contain,
-                  height: screenHeight * 0.18,
-                ),
-                Image.asset(
-                  // turn this into button later
-                  'assets/images/save.png',
-                  fit: BoxFit.contain,
-                  height: screenHeight * 0.18,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 46),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    // turn this into button later
+                    'assets/images/arrow.png',
+                    fit: BoxFit.contain,
+                    height: screenHeight * 0.10,
+                  ),
+
+                  SizedBox(width: 180,),
+                  Image.asset(
+                    // turn this into button later
+                    'assets/images/save.png',
+                    fit: BoxFit.contain,
+                    height: screenHeight * 0.10,
+                  ),
+                ],
+              ),
             ),
           ],
         );
