@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'theme_provider.dart';
+import 'package:intl/intl.dart';
 
-class JournalNewEntryPage extends StatelessWidget {
+class JournalNewEntryPage extends StatefulWidget {
   final void Function(int) select;
   const JournalNewEntryPage({super.key, required this.select});
+
+  @override
+  State<JournalNewEntryPage> createState() => _JournalNewEntryPageState();
+}
+
+class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
+  late TextEditingController dateController;
+
+  @override
+  void initState() {
+    super.initState();
+    String date = DateFormat('MM/dd/yyyy').format(DateTime.now());
+    dateController = TextEditingController(text: date);
+  }
+
+  @override
+  void dispose(){
+    dateController.dispose();
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +47,29 @@ class JournalNewEntryPage extends StatelessWidget {
             ),
 
             //Feeling text on the left and date on the right
-            Row(children: [],),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 120,
+                  child: TextFormField(
+                    controller: dateController,
+                  )
+                ),
+              ],
+            ),
+
+            /*Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: dateController,
+                    )
+                )
+              ],
+            ),*/
+
+
 
             //Journal entry
             Padding(
@@ -68,7 +113,7 @@ class JournalNewEntryPage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      select(0);
+                      widget.select(0);
                     },
                     child: Image.asset('assets/images/arrow.png',
                       fit: BoxFit.contain,
@@ -79,7 +124,7 @@ class JournalNewEntryPage extends StatelessWidget {
                   SizedBox(width: screenHeight * 0.2),
                   GestureDetector(
                     onTap: () {
-                      select(2);
+                      widget.select(2);
                     },
                     child: Image.asset('assets/images/save.png',
                       fit: BoxFit.contain,
