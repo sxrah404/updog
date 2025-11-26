@@ -51,10 +51,7 @@ class _JournalPageState extends State<JournalPage> {
                         height: double.infinity,
                       ),
                     ),
-                    //TODO format pages and add navigation feature
-                    //JournalMainPage, JournalNewEntryPage, JournalPastEntriesPage
-                    
-                    Center(child: IndexedStack(index: _index, children: pages)),
+                    IndexedStack(index: _index, children: pages),
                   ],
                 ),
               ],

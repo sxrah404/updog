@@ -28,10 +28,10 @@ class JournalNewEntryPage extends StatelessWidget {
 
             //Journal entry
             Padding(
-              padding: const EdgeInsets.only(left: 44),
+              padding: EdgeInsets.only(left: screenHeight * 0.05),
               child: SizedBox(
-                height: 360, //376
-                width: 400, //420
+                height: screenHeight * 0.4,
+                width: screenHeight * 0.4, 
                 child: TextField(
                   maxLines: null,
                   expands: true,
@@ -57,12 +57,12 @@ class JournalNewEntryPage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 38,),
+            SizedBox(height: screenHeight * 0.01),
         
 
             //Back and save buttons
             Padding(
-              padding: const EdgeInsets.only(left: 46),
+              padding: EdgeInsets.only(left: screenHeight * 0.05),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -76,7 +76,7 @@ class JournalNewEntryPage extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(width: 180,),
+                  SizedBox(width: screenHeight * 0.2),
                   GestureDetector(
                     onTap: () {
                       select(2);
