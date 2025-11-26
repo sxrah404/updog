@@ -3,8 +3,21 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 import 'package:intl/intl.dart';
 
+class NewEntry {
+  final String feeling;
+  final String entryDate;
+  final String entryText;
+
+  NewEntry({
+    required this.feeling,
+    required this.entryDate,
+    required this.entryText,
+  });
+}
+
 class JournalNewEntryPage extends StatefulWidget {
   final void Function(int) select;
+
   const JournalNewEntryPage({super.key, required this.select});
 
   @override
@@ -12,20 +25,48 @@ class JournalNewEntryPage extends StatefulWidget {
 }
 
 class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
-  late TextEditingController dateController;
+  late TextEditingController _dateController;
+  //final TextEditingController _journalEntryController;
 
   @override
   void initState() {
     super.initState();
     String date = DateFormat('MM/dd/yyyy').format(DateTime.now());
-    dateController = TextEditingController(text: date);
+    _dateController = TextEditingController(text: date);
   }
 
   @override
   void dispose(){
-    dateController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
+
+  /*void _saveEntry() {
+    if (_nameController.text.isEmpty ||
+        _dateController.text.isEmpty ||
+        _journalEntryController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Missing field'),
+        ),
+      );
+      return;
+    }
+
+    final entry = NewEntry(
+      feeling: _nameController.text,
+      entryDate: _dateController.text,
+      entryText: _journalEntryController.text,
+    );
+
+    widget.onSave(entry);
+
+    setState(() {
+  
+      _nameController.clear();
+      _journalEntryController.clear();
+      _instructionsController.clear();
+    });*/
 
 
 
@@ -53,22 +94,11 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                 SizedBox(
                   width: 120,
                   child: TextFormField(
-                    controller: dateController,
+                    controller: _dateController,
                   )
                 ),
               ],
             ),
-
-            /*Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: dateController,
-                    )
-                )
-              ],
-            ),*/
-
 
 
             //Journal entry
@@ -80,6 +110,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                 child: TextField(
                   maxLines: null,
                   expands: true,
+                  //controller: _journalEntryController,
                   textAlignVertical: TextAlignVertical.top,
                   decoration: const InputDecoration(
                     hintText: 'Type here',
@@ -124,6 +155,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   SizedBox(width: screenHeight * 0.2),
                   GestureDetector(
                     onTap: () {
+                      //_saveEntry();
                       widget.select(2);
                     },
                     child: Image.asset('assets/images/save.png',

@@ -41,7 +41,19 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = const [HomePage(), JournalPage(), SettingsPage()];
+  late final List<Widget> _pages;
+  
+  @override
+  void initState() {
+    super.initState();
+    _pages = [HomePage(onEmotionSelected: _goToJournal,), JournalPage(), SettingsPage()];
+  }
+
+  void _goToJournal() {
+    setState(() {
+      _selectedIndex = 1;
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -130,7 +142,9 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final VoidCallback onEmotionSelected;
+
+  const HomePage({super.key, required this.onEmotionSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -276,6 +290,7 @@ class HomePage extends StatelessWidget {
 
   void _onEmotionSelected(String emotion) {
     print('Selected: $emotion');
+    onEmotionSelected();
     // figure out logic later
   }
 }
