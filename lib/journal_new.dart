@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 
 class JournalNewEntryPage extends StatelessWidget {
-  const JournalNewEntryPage({super.key});
+  final void Function(int) select;
+  const JournalNewEntryPage({super.key, required this.select});
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +66,25 @@ class JournalNewEntryPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    // turn this into button later
-                    'assets/images/arrow.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
+                  GestureDetector(
+                    onTap: () {
+                      select(0);
+                    },
+                    child: Image.asset('assets/images/arrow.png',
+                      fit: BoxFit.contain,
+                      height: screenHeight * 0.10,
+                    ),
                   ),
 
                   SizedBox(width: 180,),
-                  Image.asset(
-                    // turn this into button later
-                    'assets/images/save.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
+                  GestureDetector(
+                    onTap: () {
+                      select(2);
+                    },
+                    child: Image.asset('assets/images/save.png',
+                      fit: BoxFit.contain,
+                      height: screenHeight * 0.10,
+                    ),
                   ),
                 ],
               ),

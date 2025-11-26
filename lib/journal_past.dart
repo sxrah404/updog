@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'theme_provider.dart';
 
 class JournalPastEntriesPage extends StatelessWidget {
-  const JournalPastEntriesPage({super.key});
+  final void Function(int) select;
+  const JournalPastEntriesPage({super.key, required this.select});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,17 @@ class JournalPastEntriesPage extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              // turn this into button later
-              'assets/images/arrow.png',
-              fit: BoxFit.contain,
-              height: screenHeight * 0.18,
+            GestureDetector(
+              onTap: () {
+                select(1);
+              },
+              child: Image.asset('assets/images/arrow.png',
+                fit: BoxFit.contain,
+                height: screenHeight * 0.10,
+              ),
             ),
+
+          
           ],
         );
         
