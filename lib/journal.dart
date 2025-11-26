@@ -6,7 +6,8 @@ import 'journal_new.dart';
 import 'journal_past.dart';
 
 class JournalPage extends StatefulWidget {
-  const JournalPage({super.key});
+  final int startingIndex;
+  const JournalPage({super.key, this.startingIndex = 0});
 
   @override
   State<JournalPage> createState() => _JournalPageState();
@@ -14,7 +15,13 @@ class JournalPage extends StatefulWidget {
 
 class _JournalPageState extends State<JournalPage> {
 
-  int _index = 0;
+  late int _index;
+
+  @override
+  void initState() {
+    super.initState();
+    _index = widget.startingIndex;
+  }
 
   void _select(int i) => setState(() => _index = i);
 

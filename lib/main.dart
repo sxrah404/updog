@@ -46,17 +46,19 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _pages = [HomePage(onEmotionSelected: _goToJournal,), JournalPage(), SettingsPage()];
+    _pages = [HomePage(onEmotionSelected: _goToJournal,), JournalPage(startingIndex: 0,), SettingsPage()];
   }
 
   void _goToJournal() {
     setState(() {
+      _pages[1] = JournalPage(startingIndex: 1,);
       _selectedIndex = 1;
     });
   }
 
   void _onItemTapped(int index) {
     setState(() {
+      _pages[1] = const JournalPage(startingIndex: 0); //This resets the starting journal page. Without it the first page is always skipped after an emotion from the home page is selected
       _selectedIndex = index;
     });
   }
