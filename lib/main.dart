@@ -46,12 +46,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _pages = [HomePage(onEmotionSelected: _goToJournal,), JournalPage(startingIndex: 0,), SettingsPage()];
+    _pages = [HomePage(onEmotionSelected: _goToJournal), JournalPage(startingIndex: 0,), SettingsPage()];
   }
 
-  void _goToJournal() {
+  void _goToJournal(String label) {
     setState(() {
-      _pages[1] = JournalPage(startingIndex: 1,);
+      _pages[1] = JournalPage(startingIndex: 1, emotion: label,);
       _selectedIndex = 1;
     });
   }
@@ -144,7 +144,7 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class HomePage extends StatelessWidget {
-  final VoidCallback onEmotionSelected;
+  final void Function(String) onEmotionSelected;
 
   const HomePage({super.key, required this.onEmotionSelected});
 
@@ -292,7 +292,7 @@ class HomePage extends StatelessWidget {
 
   void _onEmotionSelected(String emotion) {
     print('Selected: $emotion');
-    onEmotionSelected();
+    onEmotionSelected(emotion);
     // figure out logic later
   }
 }

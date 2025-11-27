@@ -7,7 +7,9 @@ import 'journal_past.dart';
 
 class JournalPage extends StatefulWidget {
   final int startingIndex;
-  const JournalPage({super.key, this.startingIndex = 0});
+  final String? emotion;
+
+  const JournalPage({super.key, this.startingIndex = 0, this.emotion});
 
   @override
   State<JournalPage> createState() => _JournalPageState();
@@ -28,7 +30,7 @@ class _JournalPageState extends State<JournalPage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    List<Widget> pages = [JournalMainPage(select: _select), JournalNewEntryPage(select: _select), JournalPastEntriesPage(select: _select)];
+    List<Widget> pages = [JournalMainPage(select: _select), JournalNewEntryPage(select: _select, emotion: widget.emotion), JournalPastEntriesPage(select: _select)];
 
 
     return Consumer<ThemeProvider>(

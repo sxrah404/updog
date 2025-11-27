@@ -17,8 +17,9 @@ class NewEntry {
 
 class JournalNewEntryPage extends StatefulWidget {
   final void Function(int) select;
+  final String? emotion;
 
-  const JournalNewEntryPage({super.key, required this.select});
+  const JournalNewEntryPage({super.key, required this.select, this.emotion});
 
   @override
   State<JournalNewEntryPage> createState() => _JournalNewEntryPageState();
@@ -39,6 +40,19 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
   void dispose(){
     _dateController.dispose();
     super.dispose();
+  }
+
+  String _emotionImage() {
+    switch (widget.emotion) {
+      case 'happy':
+        return 'assets/images/happy.png';
+      case 'sad':
+        return 'assets/images/sad.png';
+      case 'mad':
+        return 'assets/images/mad.png';
+      default:
+        return 'assets/images/other.png';
+    }
   }
 
   /*void _saveEntry() {
@@ -80,9 +94,10 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //Feeling image
+            //switch (emotion)
             Image.asset(
               // turn this into button later
-              'assets/images/other.png',
+              _emotionImage(),
               fit: BoxFit.contain,
               height: screenHeight * 0.18,
             ),
