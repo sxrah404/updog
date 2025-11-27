@@ -16,8 +16,8 @@ class JournalPage extends StatefulWidget {
 }
 
 class _JournalPageState extends State<JournalPage> {
-
   late int _index;
+  List<NewEntry> _entries = [];
 
   @override
   void initState() {
@@ -27,10 +27,20 @@ class _JournalPageState extends State<JournalPage> {
 
   void _select(int i) => setState(() => _index = i);
 
+  void _addEntry(NewEntry entry) {
+    setState(() {
+      _entries.add(entry);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    List<Widget> pages = [JournalMainPage(select: _select), JournalNewEntryPage(select: _select, emotion: widget.emotion), JournalPastEntriesPage(select: _select)];
+    List<Widget> pages = [
+      JournalMainPage(select: _select),
+      JournalNewEntryPage(select: _select, emotion: widget.emotion, onSave: _addEntry),
+      JournalPastEntriesPage(entries: _entries, select: _select)
+    ];
 
 
     return Consumer<ThemeProvider>(
