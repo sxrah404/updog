@@ -54,13 +54,13 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
   String _emotionImage() {
     switch (widget.emotion) {
       case 'happy':
-        return 'assets/images/happy.png';
+        return 'assets/images/happy_blank.png';
       case 'sad':
-        return 'assets/images/sad.png';
+        return 'assets/images/sad_blank.png';
       case 'mad':
-        return 'assets/images/mad.png';
+        return 'assets/images/mad_blank.png';
       default:
-        return 'assets/images/other.png';
+        return 'assets/images/other_blank.png';
     }
   }
 
