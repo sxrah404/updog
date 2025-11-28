@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ],
               ),
-              _pages[_selectedIndex],
+              IndexedStack(index: _selectedIndex, children: _pages),
               Positioned(
                 bottom: 0,
                 left: 0,
