@@ -22,7 +22,6 @@ void main() async {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -34,7 +33,6 @@ class MainApp extends StatelessWidget {
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
-
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -73,7 +71,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final grassHeight = screenHeight * 0.1;
-
     return Scaffold(
       body: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
@@ -151,13 +148,10 @@ class _MainScreenState extends State<MainScreen> {
 
 class HomePage extends StatelessWidget {
   final void Function(String) onEmotionSelected;
-
   const HomePage({super.key, required this.onEmotionSelected});
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return SafeArea(
@@ -207,7 +201,6 @@ class HomePage extends StatelessWidget {
 
   Widget _buildWideLayout(ThemeProvider themeProvider, double screenHeight) {
     final buttonSize = screenHeight * 0.2;
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -238,7 +231,6 @@ class HomePage extends StatelessWidget {
 
   Widget _buildNarrowLayout(ThemeProvider themeProvider, double screenHeight) {
     final buttonSize = screenHeight * 0.2;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
