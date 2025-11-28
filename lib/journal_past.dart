@@ -26,24 +26,44 @@ class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(12),
-                itemCount: entries.length,
-                itemBuilder: (context, index) {
-                  final entry = entries[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(entry.feeling),
-                      subtitle: Text(entry.entryDate),
-                      //onTap: () => _openRecipeDetails(recipe),
-                    ),
-                  );
-                },
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(left: screenHeight * 0.05),
+                child: SizedBox(
+                  width: screenHeight * 0.45,
+                  height: screenHeight * 0.5,
+                  
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(12),
+                    itemCount: entries.length,
+                    itemBuilder: (context, index) {
+                      final entry = entries[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(102, 162, 153, 129),
+                          borderRadius: BorderRadius.zero,
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 3,
+                          )
+                        ),
+                        child: ListTile(
+                          title: Text(entry.feeling),
+                          subtitle: Text(entry.entryDate),
+                          //onTap: () => _openRecipeDetails(recipe),
+                        ),
+                      );
+                    },
+                  ),
+                  
+                ),
               ),
             ),
+            
+            
             GestureDetector(
               onTap: () {
                 widget.select(1);
