@@ -17,7 +17,7 @@ class JournalPage extends StatefulWidget {
 
 class _JournalPageState extends State<JournalPage> {
   late int _index;
-  List<NewEntry> _entries = [];
+  final List<NewEntry> _entries = [];
 
   @override
   void initState() {
