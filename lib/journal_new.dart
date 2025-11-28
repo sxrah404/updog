@@ -83,7 +83,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     setState(() {
       //_nameController.clear();
       _journalEntryController.clear();
-      //_instructionsController.clear();
+      //_dateController = TextEditingController(text: DateFormat('MM/dd/yyyy').format(DateTime.now()));
     });
   }
 
@@ -96,24 +96,57 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //Feeling image
-            //switch (emotion)
             Image.asset(
               // turn this into button later
               _emotionImage(),
               fit: BoxFit.contain,
               height: screenHeight * 0.18,
             ),
-
             //Feeling text on the left and date on the right
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 120,
-                  child: TextFormField(controller: _dateController),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(left: screenHeight * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: screenHeight * 0.3,
+                    child: Row(
+                      children: [
+                        Text('feeling: ',
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 14,
+                            //color: Colors.black
+                          ),
+                        ),
+                      
+                        Text(widget.emotion ?? '',  
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 14,
+                            decoration: TextDecoration.underline
+                            //color: Colors.black
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                  SizedBox(
+                    width: 76,
+                    child: TextFormField(
+                      controller: _dateController,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 14,
+                        //color: Colors.black
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             //Journal entry
