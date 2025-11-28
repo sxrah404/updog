@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:updog/journal_new.dart';
 import 'theme_provider.dart';
-import 'journal_new.dart';
 
 class JournalPastEntriesPage extends StatefulWidget {
   final List<NewEntry> entries;
