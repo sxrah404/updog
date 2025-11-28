@@ -10,7 +10,7 @@ class JournalPastEntriesPage extends StatefulWidget {
   const JournalPastEntriesPage({
     super.key,
     required this.entries,
-    required this.select
+    required this.select,
   });
 
   @override
@@ -18,12 +18,10 @@ class JournalPastEntriesPage extends StatefulWidget {
 }
 
 class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final entries = widget.entries;
-
 
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
@@ -37,7 +35,6 @@ class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
                 itemBuilder: (context, index) {
                   final entry = entries[index];
                   return Card(
-                    
                     child: ListTile(
                       title: Text(entry.feeling),
                       subtitle: Text(entry.entryDate),
@@ -57,11 +54,8 @@ class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
                 height: screenHeight * 0.10,
               ),
             ),
-
-          
           ],
         );
-        
       },
     );
   }

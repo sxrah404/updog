@@ -42,23 +42,29 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   late final List<Widget> _pages;
-  
+
   @override
   void initState() {
     super.initState();
-    _pages = [HomePage(onEmotionSelected: _goToJournal), JournalPage(startingIndex: 0,), SettingsPage()];
+    _pages = [
+      HomePage(onEmotionSelected: _goToJournal),
+      JournalPage(startingIndex: 0),
+      SettingsPage(),
+    ];
   }
 
   void _goToJournal(String label) {
     setState(() {
-      _pages[1] = JournalPage(startingIndex: 1, emotion: label,);
+      _pages[1] = JournalPage(startingIndex: 1, emotion: label);
       _selectedIndex = 1;
     });
   }
 
   void _onItemTapped(int index) {
     setState(() {
-      _pages[1] = const JournalPage(startingIndex: 0); //This resets the starting journal page. Without it the first page is always skipped after an emotion from the home page is selected
+      _pages[1] = const JournalPage(
+        startingIndex: 0,
+      ); //This resets the starting journal page. Without it the first page is always skipped after an emotion from the home page is selected
       _selectedIndex = index;
     });
   }

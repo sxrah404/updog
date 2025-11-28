@@ -24,8 +24,8 @@ class JournalNewEntryPage extends StatefulWidget {
     super.key,
     required this.select,
     this.emotion,
-    this.onSave
-    });
+    this.onSave,
+  });
 
   @override
   State<JournalNewEntryPage> createState() => _JournalNewEntryPageState();
@@ -45,7 +45,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _dateController.dispose();
     _journalEntryController.dispose();
     super.dispose();
@@ -65,14 +65,10 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
   }
 
   void _saveEntry() {
-    if (_dateController.text.isEmpty ||
-        _journalEntryController.text.isEmpty) {
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Missing field'),
-        ),
-      );
+    if (_dateController.text.isEmpty || _journalEntryController.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Missing field')));
       return;
     }
 
@@ -85,14 +81,11 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     widget.onSave?.call(entry);
 
     setState(() {
-  
       //_nameController.clear();
       _journalEntryController.clear();
       //_instructionsController.clear();
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -118,48 +111,47 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
               children: [
                 SizedBox(
                   width: 120,
-                  child: TextFormField(
-                    controller: _dateController,
-                  )
+                  child: TextFormField(controller: _dateController),
                 ),
               ],
             ),
-
 
             //Journal entry
             Padding(
               padding: EdgeInsets.only(left: screenHeight * 0.05),
               child: SizedBox(
-                height: screenHeight * 0.4,
-                width: screenHeight * 0.4, 
+                height: screenHeight * 0.3,
+                width: screenHeight * 0.4,
                 child: TextField(
                   maxLines: null,
                   expands: true,
                   controller: _journalEntryController,
                   textAlignVertical: TextAlignVertical.top,
+                  style: const TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 14,
+                  ),
                   decoration: const InputDecoration(
                     hintText: 'Type here',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2
-                      ),
+                      borderSide: BorderSide(color: Colors.black, width: 3),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2
-                      ),
+                      borderSide: BorderSide(color: Colors.black, width: 3),
                     ),
-                  )
+                  ),
                 ),
               ),
             ),
 
             SizedBox(height: screenHeight * 0.01),
-        
 
             //Back and save buttons
             Padding(
@@ -171,7 +163,8 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                     onTap: () {
                       widget.select(0);
                     },
-                    child: Image.asset('assets/images/arrow.png',
+                    child: Image.asset(
+                      'assets/images/arrow.png',
                       fit: BoxFit.contain,
                       height: screenHeight * 0.10,
                     ),
@@ -183,7 +176,8 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                       _saveEntry();
                       widget.select(2);
                     },
-                    child: Image.asset('assets/images/save.png',
+                    child: Image.asset(
+                      'assets/images/save.png',
                       fit: BoxFit.contain,
                       height: screenHeight * 0.10,
                     ),
