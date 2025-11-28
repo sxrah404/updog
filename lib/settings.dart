@@ -35,9 +35,7 @@ class SettingsPage extends StatelessWidget {
                         fontSize: screenHeight * 0.024,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Montserrat',
-                        color: themeProvider.isDarkMode
-                            ? Colors.white
-                            : Colors.black,
+                        color: themeProvider.textColor,
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.04),
@@ -63,9 +61,7 @@ class SettingsPage extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               fontFamily: 'Montserrat',
                               fontSize: screenHeight * 0.02,
-                              color: themeProvider.isDarkMode
-                                  ? Colors.white
-                                  : Colors.black,
+                              color: themeProvider.textColor,
                             ),
                           ),
                           SizedBox(width: screenHeight * 0.02),

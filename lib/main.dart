@@ -181,9 +181,7 @@ class HomePage extends StatelessWidget {
                     fontSize: screenHeight * 0.024,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Montserrat',
-                    color: themeProvider.isDarkMode
-                        ? Colors.white
-                        : Colors.black,
+                    color: themeProvider.textColor,
                   ),
                 ),
                 Expanded(
@@ -299,6 +297,5 @@ class HomePage extends StatelessWidget {
   void _onEmotionSelected(String emotion) {
     print('Selected: $emotion');
     onEmotionSelected(emotion);
-    // figure out logic later
   }
 }
