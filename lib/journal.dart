@@ -38,10 +38,13 @@ class _JournalPageState extends State<JournalPage> {
     final screenHeight = MediaQuery.of(context).size.height;
     List<Widget> pages = [
       JournalMainPage(select: _select),
-      JournalNewEntryPage(select: _select, emotion: widget.emotion, onSave: _addEntry),
-      JournalPastEntriesPage(entries: _entries, select: _select)
+      JournalNewEntryPage(
+        select: _select,
+        emotion: widget.emotion,
+        onSave: _addEntry,
+      ),
+      JournalPastEntriesPage(entries: _entries, select: _select),
     ];
-
 
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
