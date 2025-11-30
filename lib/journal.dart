@@ -22,7 +22,7 @@ class _JournalPageState extends State<JournalPage> {
   @override
   void initState() {
     super.initState();
-    _index = widget.startingIndex;
+    _index = widget.emotion != null ? 1 : widget.startingIndex;
   }
 
   void _select(int i) => setState(() => _index = i);
@@ -34,10 +34,10 @@ class _JournalPageState extends State<JournalPage> {
   }
 
   void _deleteEntry(int index) {
-  setState(() {
-    _entries.removeAt(index);
-  });
-}
+    setState(() {
+      _entries.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,11 @@ class _JournalPageState extends State<JournalPage> {
         emotion: widget.emotion,
         onSave: _addEntry,
       ),
-      JournalPastEntriesPage(entries: _entries, select: _select,onDelete: _deleteEntry,),
+      JournalPastEntriesPage(
+        entries: _entries,
+        select: _select,
+        onDelete: _deleteEntry,
+      ),
     ];
 
     return Consumer<ThemeProvider>(

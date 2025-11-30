@@ -44,6 +44,19 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     _journalEntryController = TextEditingController();
   }
 
+  String _getHintText() {
+  switch (widget.emotion) {
+    case 'happy':
+      return 'What made you happy today?';
+    case 'sad':
+      return 'What made you sad today?';
+    case 'mad':
+      return 'What made you mad today?';
+    default:
+      return 'Write about your day...';
+  }
+}
+
   @override
   void dispose() {
     _dateController.dispose();
@@ -168,8 +181,8 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                     fontFamily: 'Montserrat',
                     fontSize: 14,
                   ),
-                  decoration: const InputDecoration(
-                    hintText: 'Type here',
+                  decoration: InputDecoration(
+                    hintText: _getHintText(),
                     hintStyle: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 14,

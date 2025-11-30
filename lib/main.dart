@@ -53,7 +53,11 @@ class _MainScreenState extends State<MainScreen> {
 
   void _goToJournal(String label) {
     setState(() {
-      _pages[1] = JournalPage(startingIndex: 1, emotion: label);
+      _pages[1] = JournalPage(
+        key: ValueKey(label),
+        startingIndex: 1,
+        emotion: label,
+      );
       _selectedIndex = 1;
     });
   }
