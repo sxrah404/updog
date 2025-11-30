@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _goToJournal(String label) {
     setState(() {
-      _pages[1] = JournalPage(key: UniqueKey(), startingIndex: 1, emotion: label);
+      _pages[1] = JournalPage(startingIndex: 1, emotion: label);
       _selectedIndex = 1;
     });
   }
@@ -61,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _pages[1] = JournalPage(
-        key: UniqueKey(),
+        //key: UniqueKey(),
         startingIndex: 0,
       ); //This resets the starting journal page. Without it the first page is always skipped after an emotion from the home page is selected
       _selectedIndex = index;
