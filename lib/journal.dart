@@ -33,6 +33,12 @@ class _JournalPageState extends State<JournalPage> {
     });
   }
 
+  void _deleteEntry(int index) {
+  setState(() {
+    _entries.removeAt(index);
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -43,7 +49,7 @@ class _JournalPageState extends State<JournalPage> {
         emotion: widget.emotion,
         onSave: _addEntry,
       ),
-      JournalPastEntriesPage(entries: _entries, select: _select),
+      JournalPastEntriesPage(entries: _entries, select: _select,onDelete: _deleteEntry,),
     ];
 
     return Consumer<ThemeProvider>(

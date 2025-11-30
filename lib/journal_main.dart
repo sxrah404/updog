@@ -13,30 +13,35 @@ class JournalMainPage extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return Center(
+          child: Padding(
+            padding: EdgeInsets.only(left: screenHeight * 0.05),
             child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  select(1);
-                },
-                child: Image.asset('assets/images/new_entry.png',
-                  fit: BoxFit.contain,
-                  height: screenHeight * 0.18,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    select(1);
+                  },
+                  child: Image.asset(
+                    'assets/images/new_entry.png',
+                    fit: BoxFit.contain,
+                    height: screenHeight * 0.18,
+                  ),
                 ),
-              ),
-              
-              GestureDetector(
-                onTap: () {
-                  select(2);
-                },
-                child: Image.asset('assets/images/past_entries.png',
-                  fit: BoxFit.contain,
-                  height: screenHeight * 0.18,
+
+                GestureDetector(
+                  onTap: () {
+                    select(2);
+                  },
+                  child: Image.asset(
+                    'assets/images/past_entries.png',
+                    fit: BoxFit.contain,
+                    height: screenHeight * 0.18,
+                  ),
                 ),
-              ),
-            ],
-          )
+              ],
+            ),
+          ),
         );
       },
     );

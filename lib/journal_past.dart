@@ -6,11 +6,13 @@ import 'theme_provider.dart';
 class JournalPastEntriesPage extends StatefulWidget {
   final List<NewEntry> entries;
   final void Function(int) select;
+  final void Function(int)? onDelete;
 
   const JournalPastEntriesPage({
     super.key,
     required this.entries,
     required this.select,
+    this.onDelete,
   });
 
   @override
@@ -67,6 +69,15 @@ class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
                                 fontSize: screenHeight * 0.014,
                                 fontWeight: FontWeight.w500,
                               ),
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Color.fromARGB(200, 66, 66, 66),
+                              ),
+                              onPressed: () {
+                                widget.onDelete?.call(index);
+                              },
                             ),
                           ),
                         ),
