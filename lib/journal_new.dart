@@ -96,56 +96,60 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              // turn this into button later
-              _emotionImage(),
-              fit: BoxFit.contain,
-              height: screenHeight * 0.18,
+            Padding(
+              padding: EdgeInsets.only(left: screenHeight * 0.05),
+              child: Image.asset(
+                _emotionImage(),
+                fit: BoxFit.contain,
+                height: screenHeight * 0.2,
+              ),
             ),
             //Feeling text on the left and date on the right
             Padding(
               padding: EdgeInsets.only(left: screenHeight * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: screenHeight * 0.3,
-                    child: Row(
+              child: SizedBox(
+                width: screenHeight * 0.4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-                        Text('feeling: ',
-                          style: const TextStyle(
+                        Text(
+                          'feeling: ',
+                          style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 14,
-                            //color: Colors.black
+                            fontWeight: FontWeight.w700,
+                            fontSize: screenHeight * 0.016,
                           ),
                         ),
-                      
-                        Text(widget.emotion ?? '',  
-                          style: const TextStyle(
+                        Text(
+                          widget.emotion ?? '',
+                          style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 14,
-                            decoration: TextDecoration.underline
-                            //color: Colors.black
+                            fontWeight: FontWeight.w400,
+                            fontSize: screenHeight * 0.016,
+                            decoration: TextDecoration.underline,
                           ),
                         ),
                       ],
-                    )
-                  ),
-                  SizedBox(
-                    width: 76,
-                    child: TextFormField(
-                      controller: _dateController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 14,
-                        //color: Colors.black
+                    ),
+                    SizedBox(
+                      width: screenHeight * 0.12,
+                      child: TextFormField(
+                        controller: _dateController,
+                        textAlign: TextAlign.right,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                          fontSize: screenHeight * 0.016,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
 
@@ -173,11 +177,17 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(color: Colors.black, width: 3),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(200, 66, 66, 66),
+                        width: 6,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(color: Colors.black, width: 3),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(200, 66, 66, 66),
+                        width: 6,
+                      ),
                     ),
                   ),
                 ),
