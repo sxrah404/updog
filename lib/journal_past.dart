@@ -48,7 +48,7 @@ class _JournalPastEntriesPageState extends State<JournalPastEntriesPage> {
                             borderRadius: BorderRadius.zero,
                             border: Border.all(
                               color: Color.fromARGB(200, 66, 66, 66),
-                              width: 6,
+                              width: 4,
                             ),
                           ),
                           child: ListTile(
