@@ -13,6 +13,24 @@ class NewEntry {
     required this.entryDate,
     required this.entryText,
   });
+
+  // converting to JSON for shared prefs
+  Map<String, dynamic> toJson() {
+    return {
+      'feeling': feeling,
+      'entryDate': entryDate,
+      'entryText': entryText,
+    };
+  }
+
+  // creating from JSON
+  factory NewEntry.fromJson(Map<String, dynamic> json) {
+    return NewEntry(
+      feeling: json['feeling'] as String,
+      entryDate: json['entryDate'] as String,
+      entryText: json['entryText'] as String,
+    );
+  }
 }
 
 class JournalNewEntryPage extends StatefulWidget {

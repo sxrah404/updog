@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'theme_provider.dart';
 import 'journal_main.dart';
 import 'journal_new.dart';
@@ -17,12 +19,41 @@ class JournalPage extends StatefulWidget {
 
 class _JournalPageState extends State<JournalPage> {
   late int _index;
-  final List<NewEntry> _entries = [];
+  List<NewEntry> _entries = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _index = widget.emotion != null ? 1 : widget.startingIndex;
+    _loadEntries();
+  }
+
+  // load entries from shared prefs
+  Future<void> _loadEntries() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? entriesJson = prefs.getString('journal_entries');
+
+    if (entriesJson != null) {
+      final List<dynamic> decoded = json.decode(entriesJson);
+      setState(() {
+        _entries = decoded.map((item) => NewEntry.fromJson(item)).toList();
+        _isLoading = false;
+      });
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // save entries to shared prefs
+  Future<void> _saveEntries() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String encoded = json.encode(
+      _entries.map((e) => e.toJson()).toList(),
+    );
+    await prefs.setString('journal_entries', encoded);
   }
 
   void _select(int i) => setState(() => _index = i);
@@ -31,17 +62,24 @@ class _JournalPageState extends State<JournalPage> {
     setState(() {
       _entries.add(entry);
     });
+    _saveEntries();
   }
 
   void _deleteEntry(int index) {
     setState(() {
       _entries.removeAt(index);
     });
+    _saveEntries();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+
+    if (_isLoading) { // loading screen
+      return Center(child: CircularProgressIndicator());
+    }
+
     List<Widget> pages = [
       JournalMainPage(select: _select),
       JournalNewEntryPage(
