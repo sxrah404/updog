@@ -107,6 +107,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     );
 
     widget.onSave?.call(entry);
+    widget.select(3);
 
     setState(() {
       _journalEntryController.clear();
@@ -124,6 +125,8 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
           child: Column(
             children: [
               SizedBox(height: screenHeight * 0.1),
+
+              // Emotion image and button to change emotion
               GestureDetector(
                 onTap: () {
                   widget.select(2);
@@ -237,7 +240,6 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   GestureDetector(
                     onTap: () {
                       _saveEntry();
-                      widget.select(3);//TODO come back to this 
                     },
                     child: Image.asset(
                       'assets/images/save.png',

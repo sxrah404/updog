@@ -4,7 +4,8 @@ import 'theme_provider.dart';
 
 class JournalEmotionsPage extends StatelessWidget {
   final void Function(int) select;
-  const JournalEmotionsPage({super.key, required this.select});
+  final void Function(String) onEmotionSelected;
+  const JournalEmotionsPage({super.key, required this.select, required this.onEmotionSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class JournalEmotionsPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
+                    onEmotionSelected('happy');
                     select(1);
                   },
                   child: Image.asset(
@@ -31,6 +33,7 @@ class JournalEmotionsPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    onEmotionSelected('sad');
                     select(1);
                   },
                   child: Image.asset(
@@ -47,6 +50,7 @@ class JournalEmotionsPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
+                    onEmotionSelected('mad');
                     select(1);
                   },
                   child: Image.asset(
@@ -57,6 +61,7 @@ class JournalEmotionsPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    onEmotionSelected('other');
                     select(1);
                   },
                   child: Image.asset(

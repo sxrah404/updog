@@ -23,11 +23,13 @@ class _JournalPageState extends State<JournalPage> {
   late int _index;
   List<NewEntry> _entries = [];
   bool _isLoading = true;
-  NewEntry? _selectedEntry; 
+  NewEntry? _selectedEntry;
+  String? _selectedEmotion;
 
   @override
   void initState() {
     super.initState();
+    _selectedEmotion = widget.emotion;
     _index = widget.emotion != null ? 1 : widget.startingIndex;
     _loadEntries();
   }
@@ -82,6 +84,13 @@ class _JournalPageState extends State<JournalPage> {
     });
   }
 
+  void _setEmotion(String feeling){
+    setState((){
+      _selectedEmotion = feeling;
+      _index = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -94,10 +103,13 @@ class _JournalPageState extends State<JournalPage> {
       JournalMainPage(select: _select),
       JournalNewEntryPage(
         select: _select,
-        emotion: widget.emotion,
+        emotion: _selectedEmotion,
         onSave: _addEntry,
       ),
-      JournalEmotionsPage(select: _select),
+      JournalEmotionsPage(
+        select: _select,
+        onEmotionSelected: _setEmotion,
+      ),
       JournalPastEntriesPage(
         entries: _entries,
         select: _select,
