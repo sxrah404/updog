@@ -124,11 +124,17 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
           child: Column(
             children: [
               SizedBox(height: screenHeight * 0.1),
-              Image.asset(
-                _emotionImage(),
-                fit: BoxFit.contain,
-                height: screenHeight * 0.2,
+              GestureDetector(
+                onTap: () {
+                  widget.select(2);
+                },
+                child: Image.asset(
+                  _emotionImage(),
+                  fit: BoxFit.contain,
+                  height: screenHeight * 0.2,
+                ),
               ),
+           
               // Feeling text on the left and date on the right
               SizedBox(
                 width: screenHeight * 0.4,
@@ -231,7 +237,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   GestureDetector(
                     onTap: () {
                       _saveEntry();
-                      widget.select(2);
+                      widget.select(3);//TODO come back to this 
                     },
                     child: Image.asset(
                       'assets/images/save.png',

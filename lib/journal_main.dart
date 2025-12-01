@@ -31,7 +31,7 @@ class JournalMainPage extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () {
-                    select(2);
+                    select(3);
                   },
                   child: Image.asset(
                     'assets/images/past_entries.png',

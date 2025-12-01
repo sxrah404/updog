@@ -7,6 +7,7 @@ import 'journal_main.dart';
 import 'journal_new.dart';
 import 'journal_past.dart';
 import 'journal_view.dart';
+import 'journal_emotions.dart';
 
 class JournalPage extends StatefulWidget {
   final int startingIndex;
@@ -77,7 +78,7 @@ class _JournalPageState extends State<JournalPage> {
   void _viewEntry(NewEntry entry) {
     setState(() {
       _selectedEntry = entry;
-      _index = 3; 
+      _index = 4; 
     });
   }
 
@@ -96,6 +97,7 @@ class _JournalPageState extends State<JournalPage> {
         emotion: widget.emotion,
         onSave: _addEntry,
       ),
+      JournalEmotionsPage(select: _select),
       JournalPastEntriesPage(
         entries: _entries,
         select: _select,
@@ -107,6 +109,8 @@ class _JournalPageState extends State<JournalPage> {
           entry: _selectedEntry!,
           select: _select,
         ),
+      
+      
     ];
 
     return Consumer<ThemeProvider>(

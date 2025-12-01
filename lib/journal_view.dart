@@ -113,7 +113,7 @@ class _JournalViewEntryPageState extends State<JournalViewEntryPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      widget.select(2);
+                      widget.select(3);
                     },
                     child: Image.asset(
                       'assets/images/arrow.png',
