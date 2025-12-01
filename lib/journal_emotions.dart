@@ -13,80 +13,93 @@ class JournalEmotionsPage extends StatelessWidget {
 
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
+        return Center(
+          child: Padding(
+            padding: EdgeInsets.only(left: screenHeight * 0.05),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    onEmotionSelected('happy');
-                    select(1);
-                  },
-                  child: Image.asset(
-                    'assets/images/happy.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
-                  ),
+                SizedBox(height: screenHeight * 0.1),
+                //children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        onEmotionSelected('happy');
+                        select(1);
+                      },
+                      child: Image.asset(
+                        'assets/images/happy.png',
+                        fit: BoxFit.contain,
+                        height: screenHeight * 0.2,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        onEmotionSelected('sad');
+                        select(1);
+                      },
+                      child: Image.asset(
+                        'assets/images/sad.png',
+                        fit: BoxFit.contain,
+                        height: screenHeight * 0.2,
+                      ),
+                    ),
+                  ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    onEmotionSelected('sad');
-                    select(1);
-                  },
-                  child: Image.asset(
-                    'assets/images/sad.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        onEmotionSelected('mad');
+                        select(1);
+                      },
+                      child: Image.asset(
+                        'assets/images/mad.png',
+                        fit: BoxFit.contain,
+                        height: screenHeight * 0.2,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        onEmotionSelected('other');
+                        select(1);
+                      },
+                      child: Image.asset(
+                        'assets/images/other.png',
+                        fit: BoxFit.contain,
+                        height: screenHeight * 0.2,
+                      ),
+                    ),
+                    
+                  ],
                 ),
+                SizedBox(height: screenHeight * 0.105),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        select(1);
+                      },
+                      child: Image.asset(
+                        'assets/images/arrow.png',
+                        fit: BoxFit.contain,
+                        height: screenHeight * 0.10,
+                      ),
+                    ),
+                    SizedBox(width: screenHeight * 0.31),
+                    //SizedBox(width: screenHeight * 0.10),
+                  ],
+                ),
+                SizedBox(height: screenHeight * 0.015),
               ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    onEmotionSelected('mad');
-                    select(1);
-                  },
-                  child: Image.asset(
-                    'assets/images/mad.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    onEmotionSelected('other');
-                    select(1);
-                  },
-                  child: Image.asset(
-                    'assets/images/other.png',
-                    fit: BoxFit.contain,
-                    height: screenHeight * 0.10,
-                  ),
-                ),
-                
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                select(1);
-              },
-              child: Image.asset(
-                'assets/images/arrow.png',
-                fit: BoxFit.contain,
-                height: screenHeight * 0.10,
-              ),
-            ),
-            SizedBox(width: screenHeight * 0.21),
-            SizedBox(width: screenHeight * 0.10),
-            
-          ],
+            )
+          ),
         );
         
       },
