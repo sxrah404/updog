@@ -40,7 +40,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   late final List<Widget> _pages;
-  
 
   @override
   void initState() {
@@ -54,7 +53,11 @@ class _MainScreenState extends State<MainScreen> {
 
   void _goToJournal(String label) {
     setState(() {
-      _pages[1] = JournalPage(key: UniqueKey(), startingIndex: 1, emotion: label);
+      _pages[1] = JournalPage(
+        key: UniqueKey(),
+        startingIndex: 1,
+        emotion: label,
+      );
       _selectedIndex = 1;
     });
   }
@@ -108,6 +111,7 @@ class _MainScreenState extends State<MainScreen> {
                 left: 0,
                 right: 0,
                 height: grassHeight,
+                // nav bar icons on top of grass
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -180,6 +184,7 @@ class HomePage extends StatelessWidget {
                     color: themeProvider.textColor,
                   ),
                 ),
+                // emotion buttons (4x1 grid if wide, 2x2 grid if narrow)
                 Expanded(
                   child: Align(
                     alignment: Alignment.topCenter,

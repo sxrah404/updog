@@ -6,6 +6,7 @@ import 'theme_provider.dart';
 import 'journal_main.dart';
 import 'journal_new.dart';
 import 'journal_past.dart';
+import 'journal_view.dart';
 
 class JournalPage extends StatefulWidget {
   final int startingIndex;
@@ -21,6 +22,7 @@ class _JournalPageState extends State<JournalPage> {
   late int _index;
   List<NewEntry> _entries = [];
   bool _isLoading = true;
+  NewEntry? _selectedEntry; 
 
   @override
   void initState() {
@@ -72,6 +74,13 @@ class _JournalPageState extends State<JournalPage> {
     _saveEntries();
   }
 
+  void _viewEntry(NewEntry entry) {
+    setState(() {
+      _selectedEntry = entry;
+      _index = 3; 
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -91,7 +100,13 @@ class _JournalPageState extends State<JournalPage> {
         entries: _entries,
         select: _select,
         onDelete: _deleteEntry,
+        onView: _viewEntry,
       ),
+      if (_selectedEntry != null) 
+        JournalViewEntryPage(
+          entry: _selectedEntry!,
+          select: _select,
+        ),
     ];
 
     return Consumer<ThemeProvider>(

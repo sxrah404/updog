@@ -16,11 +16,7 @@ class NewEntry {
 
   // converting to JSON for shared prefs
   Map<String, dynamic> toJson() {
-    return {
-      'feeling': feeling,
-      'entryDate': entryDate,
-      'entryText': entryText,
-    };
+    return {'feeling': feeling, 'entryDate': entryDate, 'entryText': entryText};
   }
 
   // creating from JSON
@@ -57,23 +53,9 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
   void initState() {
     super.initState();
     String date = DateFormat('MM/dd/yyyy').format(DateTime.now());
-
     _dateController = TextEditingController(text: date);
     _journalEntryController = TextEditingController();
   }
-
-  String _getHintText() {
-  switch (widget.emotion) {
-    case 'happy':
-      return 'What made you happy today?';
-    case 'sad':
-      return 'What made you sad today?';
-    case 'mad':
-      return 'What made you mad today?';
-    default:
-      return 'Write about your day...';
-  }
-}
 
   @override
   void dispose() {
@@ -82,6 +64,21 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     super.dispose();
   }
 
+  // displays different hint text based on emotion
+  String _getHintText() {
+    switch (widget.emotion) {
+      case 'happy':
+        return 'What made you happy today?';
+      case 'sad':
+        return 'What made you sad today?';
+      case 'mad':
+        return 'What made you mad today?';
+      default:
+        return 'Write about your day...';
+    }
+  }
+
+  // displays different image based on emotion
   String _emotionImage() {
     switch (widget.emotion) {
       case 'happy':
@@ -112,9 +109,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
     widget.onSave?.call(entry);
 
     setState(() {
-      //_nameController.clear();
       _journalEntryController.clear();
-      //_dateController = TextEditingController(text: DateFormat('MM/dd/yyyy').format(DateTime.now()));
     });
   }
 
@@ -124,21 +119,18 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
 
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: screenHeight * 0.05),
-              child: Image.asset(
+        return Padding(
+          padding: EdgeInsets.only(left: screenHeight * 0.05),
+          child: Column(
+            children: [
+              SizedBox(height: screenHeight * 0.1),
+              Image.asset(
                 _emotionImage(),
                 fit: BoxFit.contain,
                 height: screenHeight * 0.2,
               ),
-            ),
-            //Feeling text on the left and date on the right
-            Padding(
-              padding: EdgeInsets.only(left: screenHeight * 0.05),
-              child: SizedBox(
+              // Feeling text on the left and date on the right
+              SizedBox(
                 width: screenHeight * 0.4,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,12 +174,9 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   ],
                 ),
               ),
-            ),
-
-            //Journal entry
-            Padding(
-              padding: EdgeInsets.only(left: screenHeight * 0.05),
-              child: SizedBox(
+              SizedBox(height: screenHeight * 0.02),
+              // Journal entry
+              SizedBox(
                 height: screenHeight * 0.3,
                 width: screenHeight * 0.4,
                 child: TextField(
@@ -223,14 +212,9 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   ),
                 ),
               ),
-            ),
-
-            SizedBox(height: screenHeight * 0.035),
-
-            //Back and save buttons
-            Padding(
-              padding: EdgeInsets.only(left: screenHeight * 0.05),
-              child: Row(
+              Spacer(),
+              // Back and save buttons
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
@@ -243,8 +227,7 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                       height: screenHeight * 0.10,
                     ),
                   ),
-
-                  SizedBox(width: screenHeight * 0.2),
+                  SizedBox(width: screenHeight * 0.15),
                   GestureDetector(
                     onTap: () {
                       _saveEntry();
@@ -258,8 +241,9 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   ),
                 ],
               ),
-            ),
-          ],
+              SizedBox(height: screenHeight * 0.105),
+            ],
+          ),
         );
       },
     );
