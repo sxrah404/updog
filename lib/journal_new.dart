@@ -125,7 +125,6 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
           child: Column(
             children: [
               SizedBox(height: screenHeight * 0.1),
-
               // Emotion image and button to change emotion
               GestureDetector(
                 onTap: () {
@@ -183,11 +182,20 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                   ],
                 ),
               ),
+              Spacer(),
               SizedBox(height: screenHeight * 0.02),
               // Journal entry
-              SizedBox(
+              Container(
                 height: screenHeight * 0.3,
                 width: screenHeight * 0.4,
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(200, 66, 66, 66),
+                    width: 4,
+                  )
+                ),
+                
                 child: TextField(
                   maxLines: null,
                   expands: true,
@@ -198,28 +206,15 @@ class _JournalNewEntryPageState extends State<JournalNewEntryPage> {
                     fontSize: 14,
                   ),
                   decoration: InputDecoration(
+                    border: InputBorder.none,
                     hintText: _getHintText(),
                     hintStyle: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 14,
                       color: Colors.grey,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(200, 66, 66, 66),
-                        width: 4,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(200, 66, 66, 66),
-                        width: 4,
-                      ),
-                    ),
                   ),
-                ),
+                ),  
               ),
               Spacer(),
               // Back and save buttons
