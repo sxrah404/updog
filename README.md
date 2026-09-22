@@ -2,12 +2,11 @@
 **NOTE: Updog is still in progess!**
 
 ## ABOUT
-What's Updog?
-**Updog** is a digital journal that provides a safe space for users to reflect on their innermost thoughts and feelings.
+What's **Updog?** (nothing much, what's up with you)  
+**Updog** is a digital journal that provides a safe space for users to reflect on their innermost thoughts and feelings. This was a project I created for a User Interfaces class. 
 
 ## HOW TO RUN
-Updog is available as a web application hosted on AWS!
-- https://drpbc6fvgdp5s.cloudfront.net
+Updog is available as a web application hosted on AWS! -> https://drpbc6fvgdp5s.cloudfront.net  
 I deployed the Flutter Web application to Amazon S3 for storage and used Amazon CloudFront to distribute the application globally over HTTPS. THe S3 bucket remains private, with CloudFront Origin Access Control securely controlling access to the application files.
 
 Alternatively, if you'd like to run Updog locally, you can follow the steps below.
@@ -30,8 +29,8 @@ cd path/to/updog
 ```
 
 ### 3. Install Flutter + Dependencies
-**Install Flutter:**
-Follow the official Flutter installation guide for your operating system:
+**Install Flutter:**  
+Follow the official Flutter installation guide for your operating system:  
 https://docs.flutter.dev/get-started/install
 
 **Install Dependencies:**
