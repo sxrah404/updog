@@ -8,7 +8,7 @@ What's **Updog?** Nothing much, what's up with you :)
 
 ## HOW TO RUN
 Updog is available as a web application hosted on AWS!
-> [Link to Updog web app](https://drpbc6fvgdp5s.cloudfront.net)
+[Link to Updog web app](https://drpbc6fvgdp5s.cloudfront.net)
 I deployed the Flutter Web application to Amazon S3 for storage and used Amazon CloudFront to distribute the application globally over HTTPS. THe S3 bucket remains private, with CloudFront Origin Access Control securely controlling access to the application files.
 
 Alternatively, if you'd like to run Updog locally, you can follow the steps below.
@@ -32,8 +32,7 @@ cd path/to/updog
 
 ### 3. Install Flutter + Dependencies
 **Install Flutter:**  
-Follow the official Flutter installation guide for your operating system:  
-https://docs.flutter.dev/get-started/install
+Follow the official Flutter installation guide for your operating system: https://docs.flutter.dev/get-started/install
 
 **Install Dependencies:**
 ```bash
