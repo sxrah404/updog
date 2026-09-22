@@ -2,16 +2,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'theme_provider.dart';
 import 'journal.dart';
 import 'settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     await DesktopWindow.setWindowSize(const Size(780, 1000));
     await DesktopWindow.setMinWindowSize(const Size(580, 600));
   }
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
